@@ -1,0 +1,184 @@
+<p-dialog
+  header="Datos del colaborador"
+  [(visible)]="visible"
+  [style]="{ width: '70vw' }"
+  [baseZIndex]="10000"
+  [modal]="true"
+  (onHide)="onDialogHide()"
+  (onShow)="loadEmployeeData()"
+>
+<form [formGroup]="formUpdate" (ngSubmit)="updateEmployeeData()">
+  <div
+    class="flex-column-container"
+    [ngClass]="{
+      error: formUpdate.get('full_name')?.invalid && formUpdate.get('full_name')?.dirty
+    }"
+  >
+    <label for="full_name">Nombre del colaborador</label>
+    <input
+      pInputText
+      id="username"
+      placeholder="Ingresa el nombre del colaborador"
+      formControlName="full_name"
+      readonly
+    />
+    <small
+      class="input-error"
+      id="username-help"
+      *ngIf="formUpdate.get('full_name')?.invalid && formUpdate.get('full_name')?.dirty"
+    >
+      El nombre debe contener solo caracteres tipo texto</small
+    >
+  </div>
+
+  <div
+    class="flex-column-container"
+    [ngClass]="{
+      error:
+        formUpdate.get('email')?.invalid &&
+        formUpdate.get('email')?.dirty
+    }"
+  >
+    <label for="email">Correo electronico</label>
+    <input
+      pInputText
+      pKeyFilter="int"
+      placeholder="Ingresa el correo electronico"
+      formControlName="email"
+      readonly
+    />
+    <small
+      class="input-error"
+      id="username-help"
+      *ngIf="
+        formUpdate.get('email')?.invalid &&
+        formUpdate.get('email')?.dirty
+      "
+    >
+      Solo se permiten correo electronico</small
+    >
+  </div>
+
+  <div class="formgrid grid">
+    <div
+      class="flex-column-container field col w-full"
+      [ngClass]="{
+        error:
+          formUpdate.get('hire_date')?.invalid &&
+          formUpdate.get('hire_date')?.dirty
+      }"
+    >
+      <label for="hire_date">Fecha de ingreso: </label>
+      <input
+      pInputText
+        placeholder="Seleccione una fecha"
+        formControlName="hire_date"
+        dateFormat="dd/mm/yy"
+        dataType="string"
+        readonly
+      />
+      <small
+        class="input-error"
+        id="username-help"
+        *ngIf="
+          formUpdate.get('hire_date')?.invalid &&
+          formUpdate.get('hire_date')?.dirty
+        "
+      >
+        No has seleccionado una fecha</small
+      >
+    </div>
+
+    <div
+      class="flex-column-container field col w-full"
+      [ngClass]="{
+        error:
+          formUpdate.get('name_area')?.invalid && formUpdate.get('name_area')?.dirty
+      }"
+    >
+      <label for="name_area">Cargo: </label>
+      <input
+        pInputText
+        pKeyFilter="int"
+        placeholder="Seleccione el cargo"
+        formControlName="name_area"
+        readonly
+      />
+      <small
+        class="input-error"
+        id="username-help"
+        *ngIf="
+          formUpdate.get('name_area')?.invalid && formUpdate.get('name_area')?.dirty
+        "
+      >
+        Este campo debe ir lleno</small
+      >
+    </div>
+  </div>
+
+  <div class="formgrid grid">
+    <div
+      class="flex-column-container field col w-full"
+      [ngClass]="{
+        error:
+          formUpdate.get('name_company')?.invalid &&
+          formUpdate.get('name_company')?.dirty
+      }"
+    >
+      <label for="name_company">Compañia: </label>
+      <input
+      pInputText
+        formControlName="name_company"
+        dateFormat="dd/mm/yy"
+        dataType="string"
+        readonly
+      />
+      <small
+        class="input-error"
+        id="username-help"
+        *ngIf="
+          formUpdate.get('name_company')?.invalid &&
+          formUpdate.get('name_company')?.dirty
+        "
+      >
+        No has seleccionado una fecha</small
+      >
+    </div>
+
+    <div
+      class="flex-column-container field col w-full"
+      [ngClass]="{
+        error:
+          formUpdate.get('name_category')?.invalid && formUpdate.get('name_category')?.dirty
+      }"
+    >
+      <label for="name_category">Categoria: </label>
+      <input
+        pInputText
+        pKeyFilter="int"
+        placeholder="Seleccione el cargo"
+        formControlName="name_category"
+        readonly
+      />
+      <small
+        class="input-error"
+        id="username-help"
+        *ngIf="
+          formUpdate.get('name_category')?.invalid && formUpdate.get('name_category')?.dirty
+        "
+      >
+        Este campo debe ir lleno</small
+      >
+    </div>
+  </div>
+
+  <div class="flex-column-container field col w-full">
+    <label for="name_category">Nivel de satisfacción</label>
+    <p-rating
+      formControlName="satisfaction_level"
+      [cancel]="false"
+      [readonly]="true"
+    ></p-rating>
+  </div>
+</form>
+</p-dialog>
