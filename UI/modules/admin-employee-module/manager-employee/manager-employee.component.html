@@ -11,15 +11,28 @@
     [id_employee]="employeeData"
     (changeVisible)="onEditEmployeeVisibilityChange($event)"
   ></app-edit-employee>
-  <div class="flex flex-row flex-wrap">
+  <app-list-favorites-employee
+    class="top=50"
+    [visible]="visibleListFavorites"
+    (changeVisible)="visibleListFavorites = false"
+    [data]="employeeFavorites"
+    (changeStatusFavorite)="updateEmployee($event)"
+  ></app-list-favorites-employee>
 
-    <app-s-button  [label]="labelBtn" (click)="showDialogCreate()"></app-s-button>
+  <div class="flex flex-row flex-wrap">
+    <app-s-button
+      label="Crear Empleado"
+      (click)="showDialogCreate()"
+    ></app-s-button>
+    <app-s-button
+      label="Mostrar favoritos"
+      (click)="showListFavorites()"
+    ></app-s-button>
   </div>
   <app-s-table
-  [columns]="columns"
-  [data]="employees"
-  [showEditColumn]="showEditColumn"
-  (editEmployeeData)="openEditView($event)"
-></app-s-table>
-
+    [columns]="columns"
+    [data]="employees"
+    (editEmployeeData)="openEditView($event)"
+    (changeStatusFavorite)="updateEmployee($event)"
+  ></app-s-table>
 </div>

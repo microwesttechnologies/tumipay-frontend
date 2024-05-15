@@ -11,7 +11,7 @@ export class UpdateEmployeeUseCases {
     constructor(
         private _updateEmployeeGateway: UpdateEmployeeGateway
     ) {}
-    
+
     updateEmployee(id: number, updatedEmployeeData: any): Observable<Employee> {
         return this._updateEmployeeGateway.updateEmployee(id, updatedEmployeeData);
     }

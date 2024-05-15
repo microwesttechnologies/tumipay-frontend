@@ -1,0 +1,14 @@
+<p-dialog
+  header="Lista de favoritos"
+  [(visible)]="visible"
+  [style]="{ width: '70vw' }"
+  [baseZIndex]="10000"
+  [modal]="true"
+  (onHide)="onDialogHide()"
+>
+  <app-s-table
+    [columns]="columns"
+    [data]="data"
+    (changeStatusFavorite)="onChangeStatusFavorite($event)"
+  ></app-s-table>
+</p-dialog>

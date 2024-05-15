@@ -76,7 +76,8 @@ export class EditEmployeeComponent implements OnInit {
       name_area: this.formUpdate.value.name_area,
       name_category: this.formUpdate.value.name_category,
       name_company: this.formUpdate.value.name_company,
-      satisfaction_level: this.formUpdate.value.satisfaction_level
+      satisfaction_level: this.formUpdate.value.satisfaction_level,
+      favorite:this.formUpdate.value.favorite
     };
 
     this._updateEmployee.updateEmployee(this.id_employee, updatedEmployee).subscribe(

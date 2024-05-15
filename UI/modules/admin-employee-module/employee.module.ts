@@ -32,12 +32,14 @@ import { GetAllAreaService } from 'Core/Infraestructura/driver-adapter/Services/
 import { GetAllCompanyService } from 'Core/Infraestructura/driver-adapter/Services/GetAllCompany.service';
 import { GetAllCategoryService } from 'Core/Infraestructura/driver-adapter/Services/GetAllCategory.service';
 import { DropdownModule } from 'primeng/dropdown';
+import { ListFavoritesEmployeeComponent } from './list-favorites-employee/list-favorites-employee.component';
 
 @NgModule({
   declarations: [
     CreateEmployeeComponent,
     ManagerEmployeeComponent,
     EditEmployeeComponent,
+    ListFavoritesEmployeeComponent
   ],
   imports: [
     CommonModule,

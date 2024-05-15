@@ -46,10 +46,10 @@ interface TableColumn {
 })
 export class STableComponent<T> implements OnInit {
   @Input() data!: T[];
-  @Input() rowsPerPage: number = 10;
+  @Input() rowsPerPage: number = 5;
   @Input() columns: TableColumn[] = [];
   @Input() currentPageReportTemplate: string = '';
-  @Input() rowsPerPageOptions: number[] = [10, 25, 50];
+  @Input() rowsPerPageOptions: number[] = [5, 10, 25];
   @Input() showEditColumn: boolean = false;
   @Input() showViewColumn: boolean = false;
   @Input() showDeleteColumn: boolean = false;
@@ -60,8 +60,8 @@ export class STableComponent<T> implements OnInit {
   @Output() onEditClick: EventEmitter<string> = new EventEmitter<string>();
   @Output() onDeleteClick: EventEmitter<string> = new EventEmitter<string>();
   @Output() editEmployeeData: EventEmitter<any> = new EventEmitter<any>();
-  pageSizeOptions: number[] = [5, 10, 20];
-  icon = 'pi pi-user-edit';
+  @Output() changeStatusFavorite: EventEmitter<any> = new EventEmitter<any>();
+  pageSizeOptions: number[] = [5, 10, 25];
   visible!: boolean;
   value!: number;
 
@@ -82,6 +82,10 @@ export class STableComponent<T> implements OnInit {
 
   onDeleteButtonClick(id: string) {
     this.onDeleteClick.emit(id);
+  }
+
+  onChangeStatusFavorite(id_employee:string){
+    this.changeStatusFavorite.emit(id_employee);
   }
 
   onSort(event: SortEvent) {

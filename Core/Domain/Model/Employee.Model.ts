@@ -7,5 +7,5 @@ export interface Employee {
   name_area: string;
   name_category: string;
   satisfaction_level: number;
+  favorite?: number;
 }
-
