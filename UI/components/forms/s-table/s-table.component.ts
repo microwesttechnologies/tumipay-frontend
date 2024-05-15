@@ -60,6 +60,7 @@ export class STableComponent<T> implements OnInit {
   @Output() onEditClick: EventEmitter<string> = new EventEmitter<string>();
   @Output() onDeleteClick: EventEmitter<string> = new EventEmitter<string>();
   @Output() editEmployeeData: EventEmitter<any> = new EventEmitter<any>();
+  pageSizeOptions: number[] = [5, 10, 20];
   icon = 'pi pi-user-edit';
   visible!: boolean;
   value!: number;
