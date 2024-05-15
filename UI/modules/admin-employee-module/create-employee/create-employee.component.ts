@@ -149,6 +149,7 @@ export class CreateEmployeeComponent implements OnInit {
     .subscribe(
       data => {
         this.categories = data;
+        console.log(this.categories);
       },
       (error: any) => {
         console.error('Error al obtener las categorias:', error);

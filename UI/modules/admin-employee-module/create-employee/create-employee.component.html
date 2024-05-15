@@ -8,10 +8,12 @@
   [baseZIndex]="10000"
 >
   <form [formGroup]="formCreate" (ngSubmit)="createEmployee()">
-       <div
+    <div
       class="flex-column-container"
       [ngClass]="{
-        error: formCreate.get('full_name')?.invalid && formCreate.get('full_name')?.dirty
+        error:
+          formCreate.get('full_name')?.invalid &&
+          formCreate.get('full_name')?.dirty
       }"
     >
       <label for="full_name">Nombre del colaborador</label>
@@ -24,7 +26,10 @@
       <small
         class="input-error"
         id="username-help"
-        *ngIf="formCreate.get('full_name')?.invalid && formCreate.get('full_name')?.dirty"
+        *ngIf="
+          formCreate.get('full_name')?.invalid &&
+          formCreate.get('full_name')?.dirty
+        "
       >
         El nombre debe contener solo caracteres tipo texto</small
       >
@@ -34,8 +39,7 @@
       class="flex-column-container"
       [ngClass]="{
         error:
-          formCreate.get('email')?.invalid &&
-          formCreate.get('email')?.dirty
+          formCreate.get('email')?.invalid && formCreate.get('email')?.dirty
       }"
     >
       <label for="email">Correo electronico</label>
@@ -49,8 +53,7 @@
         class="input-error"
         id="username-help"
         *ngIf="
-          formCreate.get('email')?.invalid &&
-          formCreate.get('email')?.dirty
+          formCreate.get('email')?.invalid && formCreate.get('email')?.dirty
         "
       >
         Solo se permiten numeros</small
@@ -90,21 +93,24 @@
         class="flex-column-container field col w-full"
         [ngClass]="{
           error:
-            formCreate.get('name_company')?.invalid && formCreate.get('name_company')?.dirty
+            formCreate.get('name_company')?.invalid &&
+            formCreate.get('name_company')?.dirty
         }"
       >
         <label for="name_company">Compañia: </label>
-        <input
-          pInputText
-          pKeyFilter="int"
-          placeholder="Seleccione el cargo"
+        <p-dropdown
           formControlName="name_company"
-        />
+          placeholder="Seleccione una categoria"
+          [options]="companies"
+          optionLabel="name_company"
+          optionValue="id_company"
+        ></p-dropdown>
         <small
           class="input-error"
           id="username-help"
           *ngIf="
-            formCreate.get('name_company')?.invalid && formCreate.get('name_company')?.dirty
+            formCreate.get('name_company')?.invalid &&
+            formCreate.get('name_company')?.dirty
           "
         >
           Este campo debe ir lleno</small
@@ -112,28 +118,29 @@
       </div>
     </div>
 
-
-
     <div class="formgrid grid">
       <div
         class="flex-column-container field col w-full"
         [ngClass]="{
           error:
-            formCreate.get('name_area')?.invalid && formCreate.get('name_area')?.dirty
+            formCreate.get('name_area')?.invalid &&
+            formCreate.get('name_area')?.dirty
         }"
       >
         <label for="name_area">Area: </label>
-        <input
-          pInputText
-          pKeyFilter="int"
-          placeholder="Seleccione el cargo"
+        <p-dropdown
           formControlName="name_area"
-        />
+          placeholder="Seleccione una categoria"
+          [options]="areas"
+          optionLabel="name_area"
+          optionValue="id_area"
+        ></p-dropdown>
         <small
           class="input-error"
           id="username-help"
           *ngIf="
-            formCreate.get('name_area')?.invalid && formCreate.get('name_area')?.dirty
+            formCreate.get('name_area')?.invalid &&
+            formCreate.get('name_area')?.dirty
           "
         >
           Este campo debe ir lleno</small
@@ -144,22 +151,24 @@
         class="flex-column-container field col w-full"
         [ngClass]="{
           error:
-            formCreate.get('name_category')?.invalid && formCreate.get('name_category')?.dirty
+            formCreate.get('name_category')?.invalid &&
+            formCreate.get('name_category')?.dirty
         }"
       >
         <label for="name_category">Categoria: </label>
-        <!-- <input
-          pInputText
-          pKeyFilter="int"
-          placeholder="Seleccione el cargo"
+        <p-dropdown
           formControlName="name_category"
-        /> -->
-        <p-dropdown formControlName="name_category" placeholder="Seleccione una categoria" [options]="categories" optionLabel="name"></p-dropdown>
+          placeholder="Seleccione una categoria"
+          [options]="categories"
+          optionLabel="name_category"
+          optionValue="id_category"
+        ></p-dropdown>
         <small
           class="input-error"
           id="username-help"
           *ngIf="
-            formCreate.get('name_category')?.invalid && formCreate.get('name_category')?.dirty
+            formCreate.get('name_category')?.invalid &&
+            formCreate.get('name_category')?.dirty
           "
         >
           Este campo debe ir lleno</small
@@ -174,8 +183,6 @@
         [cancel]="false"
       ></p-rating>
     </div>
-
-
 
     <div class="formgrid grid">
       <app-s-button
