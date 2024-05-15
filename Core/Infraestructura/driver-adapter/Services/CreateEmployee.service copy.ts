@@ -15,7 +15,7 @@ export class CreateEmployeeService extends CreateEmployeeGateway {
   }
 
   create(employee: Employee): Observable<Object> {
-    // Envía la solicitud POST al backend con la información del empleado
-    return this.http.post(environment.apiUrl + 'Create', employee);
+    return this.http.post(environment.apiUrl + 'employees', employee);
   }
+
 }

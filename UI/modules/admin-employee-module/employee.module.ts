@@ -24,9 +24,14 @@ import { ImageModule } from 'primeng/image';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { UploadImageGateway } from 'Core/Domain/Gateway/UploadImageGateway';
-import { UploadImageService } from 'Core/Infraestructura/driver-adapter/Services/UploadImage.service';
 import { RatingModule } from 'primeng/rating';
+import { GetAllAreaGateway } from 'Core/Domain/Gateway/GetAllArea.Gateway';
+import { GetAllCompanyGateway } from 'Core/Domain/Gateway/GetAllCompany.Gateway';
+import { GetAllCategoryGateway } from 'Core/Domain/Gateway/GetAllCategory.Gateway';
+import { GetAllAreaService } from 'Core/Infraestructura/driver-adapter/Services/GetAllArea.service';
+import { GetAllCompanyService } from 'Core/Infraestructura/driver-adapter/Services/GetAllCompany.service';
+import { GetAllCategoryService } from 'Core/Infraestructura/driver-adapter/Services/GetAllCategory.service';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -50,6 +55,7 @@ import { RatingModule } from 'primeng/rating';
     FileUploadModule,
     ToastModule,
     RatingModule,
+    DropdownModule
   ],
   exports: [
     CreateEmployeeComponent,
@@ -58,11 +64,13 @@ import { RatingModule } from 'primeng/rating';
   ],
   providers: [
     { provide: GetAllEmployeeGateway, useClass: GetAllEmployeeService },
+    { provide: GetAllAreaGateway, useClass: GetAllAreaService },
+    { provide: GetAllCompanyGateway, useClass: GetAllCompanyService },
+    { provide: GetAllCategoryGateway, useClass: GetAllCategoryService },
     { provide: GetByIdEmployeeGateway, useClass: GetByIdEmployeeService },
     { provide: CreateEmployeeGateway, useClass: CreateEmployeeService },
     { provide: UpdateEmployeeGateway, useClass: UpdateEmployeeService },
     { provide: MessageService },
-    { provide: UploadImageGateway, useClass: UploadImageService },
   ],
 })
 export class EmployeeModule {}

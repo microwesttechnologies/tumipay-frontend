@@ -9,7 +9,7 @@ import { CreateEmployeeGateway } from '../Gateway/CreateEmployee.Gateway';
 export class CreateEmployeeUseCases {
   constructor(private _employeeCreateGateway: CreateEmployeeGateway) {}
 
-  createEmployee(employee: Employee): Observable<Object> {
+  createEmployee(employee: any): Observable<Object> {
     return this._employeeCreateGateway.create(employee);
   }
 }

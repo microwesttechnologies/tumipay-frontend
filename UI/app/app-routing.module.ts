@@ -4,8 +4,9 @@ import { CreateEmployeeComponent } from 'UI/modules/admin-employee-module/create
 import { ManagerEmployeeComponent } from 'UI/modules/admin-employee-module/manager-employee/manager-employee.component';
 
 const routes: Routes = [
-  { path: 'create-employee', component: CreateEmployeeComponent }, 
-  { path: 'admin-employee', component: ManagerEmployeeComponent }, 
+  { path: '', redirectTo: '/admin-employee', pathMatch: 'full' },
+  { path: 'create-employee', component: CreateEmployeeComponent },
+  { path: 'admin-employee', component: ManagerEmployeeComponent },
 ];
 
 @NgModule({

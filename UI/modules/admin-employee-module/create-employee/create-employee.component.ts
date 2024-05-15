@@ -1,4 +1,3 @@
-
 import {
   Component,
   Input,
@@ -9,7 +8,13 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UploadImageGateway } from 'Core/Domain/Gateway/UploadImageGateway';
+import { Area } from 'Core/Domain/Model/Area.Model';
+import { Category } from 'Core/Domain/Model/Category.Model';
+import { Company } from 'Core/Domain/Model/Company.Model';
 import { CreateEmployeeUseCases } from 'Core/Domain/UseCase/CreateEmployeeUseCase';
+import { GetAllAreaUseCases } from 'Core/Domain/UseCase/GetAllAreaUseCase';
+import { GetAllCategoryUseCases } from 'Core/Domain/UseCase/GetAllCategoryUseCase';
+import { GetAllCompanyUseCases } from 'Core/Domain/UseCase/GetAllCompanyUseCase';
 import { MessageService } from 'primeng/api';
 import Swal from 'sweetalert2';
 
@@ -27,58 +32,36 @@ interface UploadEvent {
 export class CreateEmployeeComponent implements OnInit {
   @Input() visible: boolean = false;
   @Output() changeVisible = new EventEmitter<boolean>();
-  nameEmployee: string = '';
-  IdentificationCard: number = 0;
-  Picture: string = '';
-  DateOfAdmission: string = '';
-  Cargo: string = '';
-  State: string = '';
+  areas: Array<Area> = [];
+  companies: Array<Company> = [];
+  categories: Array<Category> = [];
+  response: any;
+
   formCreate!: FormGroup;
-  routeImage: string = '/UI/assets/img/';
 
   constructor(
     private _createEmployeeUseCase: CreateEmployeeUseCases,
-    private formBuilder: FormBuilder,
-    private uploadImageGateway: UploadImageGateway,
-    private messageService: MessageService
+    private _getAllCompanyUseCase: GetAllCompanyUseCases,
+    private _getAllCategoriesUseCase: GetAllCategoryUseCases,
+    private _getAllAreasUseCase: GetAllAreaUseCases,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
     this.formCreate = this.formBuilder.group({
-      picture: [''],
-      name: ['', Validators.required],
-      identificationCard: ['', Validators.required],
-      dateOfAdmission: ['', Validators.required],
-      cargo: ['', Validators.required],
-      state: [''],
+      full_name: ['', Validators.required],
+      hire_date: ['', Validators.required],
+      email: ['', Validators.required],
+      name_company: ['', Validators.required],
+      name_area: ['', Validators.required],
+      name_category: ['', Validators.required],
+      satisfaction_level: ['', Validators.required],
     });
+
+    this.getAllCompany();
+    this.getAllCategory();
+    this.getAllArea();
   }
-
-  onUpload(event: any) {
-    if (event.files.length === 0) {
-      return;
-    }
-
-    const file: File = event.files[0];
-    this.Picture = this.routeImage+file.name;
-    this.messageService.add({ severity: 'success', summary: 'Perfecto!', detail: 'Imagen cargada exitosamente!!' });
-  }
-
-  uploadFile(file: File, employeeId: number): void {
-    const formData: FormData = new FormData();
-    formData.append('file', file, file.name);
-
-    this.uploadImageGateway.uploadImage(employeeId, file).subscribe(
-      (response) => {
-        console.log('Archivo subido correctamente:', response);
-      },
-      (error) => {
-        console.error('Error al subir el archivo:', error);
-      }
-    );
-  }
-
-
 
   onDialogHide() {
     this.visible = false;
@@ -96,12 +79,12 @@ export class CreateEmployeeComponent implements OnInit {
         full_name: this.formCreate.value.full_name,
         hire_date: this.formCreate.value.hire_date,
         email: this.formCreate.value.email,
-        name_company: this.formCreate.value.name_company,
-        name_area: this.formCreate.value.name_area,
-        name_category: this.formCreate.value.name_category,
+        id_company: this.formCreate.value.name_company,
+        id_area: this.formCreate.value.name_area,
+        id_category: this.formCreate.value.name_category,
         satisfaction_level: this.formCreate.value.satisfaction_level,
       };
-
+      console.log(newEmployee);
       this._createEmployeeUseCase.createEmployee(newEmployee).subscribe(
         (response: any) => {
           Swal.fire({
@@ -136,5 +119,40 @@ export class CreateEmployeeComponent implements OnInit {
 
   isFormValid(): boolean {
     return this.formCreate.valid;
+  }
+
+  getAllCompany() {
+    this.response = this._getAllCompanyUseCase.getAllCompanies()
+    .subscribe(
+      data => {
+        this.companies = data;
+      },
+      (error: any) => {
+        console.error('Error al obtener los compañias:', error);
+      }
+    );
+  }
+  getAllArea() {
+    this.response = this._getAllAreasUseCase.getAllAreas()
+    .subscribe(
+      data => {
+        this.areas = data;
+      },
+      (error: any) => {
+        console.error('Error al obtener las areas:', error);
+      }
+    );
+  }
+
+  getAllCategory() {
+    this.response = this._getAllCategoriesUseCase.getAllCategories()
+    .subscribe(
+      data => {
+        this.categories = data;
+      },
+      (error: any) => {
+        console.error('Error al obtener las categorias:', error);
+      }
+    );
   }
 }
